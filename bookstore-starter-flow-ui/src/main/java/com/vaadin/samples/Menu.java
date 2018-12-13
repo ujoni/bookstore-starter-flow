@@ -22,6 +22,8 @@ public class Menu extends FlexLayout {
     private static final String SHOW_TABS = "show-tabs";
     private Tabs tabs;
 
+    private Button logoutButton;
+
     public Menu() {
         setClassName("menu-bar");
 
@@ -63,7 +65,7 @@ public class Menu extends FlexLayout {
         add(tabs);
 
         // logout menu item
-        Button logoutButton = new Button("Logout",
+        logoutButton = new Button("Logout",
                 VaadinIcon.SIGN_OUT.create());
         logoutButton.addClickListener(event -> {
             VaadinSession.getCurrent().getSession().invalidate();
@@ -72,6 +74,10 @@ public class Menu extends FlexLayout {
 
         logoutButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
         add(logoutButton);
+    }
+
+    public void logout() {
+        logoutButton.click();
     }
 
     /**
