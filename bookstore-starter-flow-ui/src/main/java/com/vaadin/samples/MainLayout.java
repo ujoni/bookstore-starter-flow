@@ -3,6 +3,7 @@ package com.vaadin.samples;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.Focusable;
 import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.KeyShortcut;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
@@ -34,9 +35,7 @@ public class MainLayout extends FlexLayout implements RouterLayout {
 
         add(menu);
 
-
-        ComponentUtil.makeFocusable(this);
-        ComponentUtil.addShortcutListener(this, KeyShortcut.of('L', KeyModifier.META), true, false, event -> {
+        ComponentUtil.addKeyboardListener(this, KeyShortcut.of('L', KeyModifier.META), true, false, event -> {
             menu.logout();
         });
 
