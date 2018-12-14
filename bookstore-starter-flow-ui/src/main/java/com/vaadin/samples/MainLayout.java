@@ -19,7 +19,7 @@ import com.vaadin.samples.crud.SampleCrudView;
 @HtmlImport("css/shared-styles.html")
 @Theme(value = Lumo.class)
 @PWA(name = "Bookstore Starter", shortName = "Bookstore")
-public class MainLayout extends FlexLayout implements RouterLayout, Focusable<MainLayout> {
+public class MainLayout extends FlexLayout implements RouterLayout {
     private Menu menu;
 
     public MainLayout() {
@@ -34,8 +34,8 @@ public class MainLayout extends FlexLayout implements RouterLayout, Focusable<Ma
 
         add(menu);
 
-        setTabIndex(-1);
 
+        ComponentUtil.makeFocusable(this);
         ComponentUtil.addShortcutListener(this, KeyShortcut.of('L', KeyModifier.META), true, false, event -> {
             menu.logout();
         });
