@@ -1,5 +1,8 @@
 package com.vaadin.samples.crud;
 
+import com.vaadin.flow.component.ComponentUtil;
+import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.KeyShortcut;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -61,6 +64,8 @@ public class SampleCrudView extends HorizontalLayout
         add(form);
 
         viewLogic.init();
+
+        ComponentUtil.addShortcut(KeyShortcut.of('N', KeyModifier.CONTROL), viewLogic::newProduct);
     }
 
     public HorizontalLayout createTopBar() {

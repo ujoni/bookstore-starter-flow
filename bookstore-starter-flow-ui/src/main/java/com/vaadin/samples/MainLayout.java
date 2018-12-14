@@ -1,9 +1,6 @@
 package com.vaadin.samples;
 
-import com.vaadin.flow.component.ComponentUtil;
-import com.vaadin.flow.component.Focusable;
-import com.vaadin.flow.component.KeyModifier;
-import com.vaadin.flow.component.KeyShortcut;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
@@ -35,9 +32,21 @@ public class MainLayout extends FlexLayout implements RouterLayout {
 
         add(menu);
 
-        ComponentUtil.addKeyboardListener(this, KeyShortcut.of('L', KeyModifier.META), true, false, event -> {
-            menu.logout();
-        });
+        ComponentUtil.addShortcut(this, KeyShortcut.of('L', KeyModifier.META), menu::logout);
+        ComponentUtil.addShortcut(this, KeyShortcut.of('1', KeyModifier.META), this::crudView);
+        ComponentUtil.addShortcut(this, KeyShortcut.of('2', KeyModifier.META), this::aboutView);
 
+    }
+
+    private void crudView() {
+        System.out.println("!!! crudView");
+
+        UI.getCurrent().navigate(SampleCrudView.class);
+    }
+
+    private void aboutView() {
+        System.out.println("!!! aboutView");
+
+        UI.getCurrent().navigate(AboutView.class);
     }
 }
