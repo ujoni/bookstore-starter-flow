@@ -65,7 +65,8 @@ public class SampleCrudView extends HorizontalLayout
 
         viewLogic.init();
 
-        ComponentUtil.addShortcut(KeyShortcut.of('N', KeyModifier.CONTROL), viewLogic::newProduct);
+        ComponentUtil.addShortcut(KeyShortcut.of('N', KeyModifier.META), viewLogic::newProduct);
+        ComponentUtil.addShortcut(KeyShortcut.of('F', KeyModifier.META), filter::focus);
     }
 
     public HorizontalLayout createTopBar() {

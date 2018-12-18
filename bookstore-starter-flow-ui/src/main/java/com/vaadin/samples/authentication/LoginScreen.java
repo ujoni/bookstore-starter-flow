@@ -1,7 +1,6 @@
 package com.vaadin.samples.authentication;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.HtmlImport;
@@ -36,6 +35,9 @@ public class LoginScreen extends FlexLayout {
         accessControl = AccessControlFactory.getInstance().createAccessControl();
         buildUI();
         username.focus();
+
+        ComponentUtil.addShortcut(username, KeyShortcut.of(Key.ENTER), login::click);
+        ComponentUtil.addShortcut(password, KeyShortcut.of(Key.ENTER), login::click);
     }
 
     private void buildUI() {

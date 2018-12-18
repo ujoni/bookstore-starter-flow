@@ -7,6 +7,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
 
+import com.vaadin.flow.component.ComponentUtil;
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
+import com.vaadin.flow.component.KeyShortcut;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
@@ -181,6 +185,10 @@ public class ProductForm extends Div {
         });
 
         content.add(save, discard, delete, cancel);
+
+        ComponentUtil.addShortcut(KeyShortcut.of('S', KeyModifier.META), save::click);
+        ComponentUtil.addShortcut(KeyShortcut.of(Key.ESCAPE), cancel::click);
+
     }
 
     public void setCategories(Collection<Category> categories) {
