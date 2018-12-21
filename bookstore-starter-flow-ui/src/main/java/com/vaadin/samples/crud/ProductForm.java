@@ -3,14 +3,13 @@ package com.vaadin.samples.crud;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
 
-import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
-import com.vaadin.flow.component.KeyShortcut;
+import com.vaadin.flow.component.Shortcut;
+import com.vaadin.flow.component.ShortcutUtil;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
@@ -156,12 +155,14 @@ public class ProductForm extends Div {
         save = new Button("Save");
         save.setWidth("100%");
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        save.addClickListener(event -> {
-            if (currentProduct != null
-                    && binder.writeBeanIfValid(currentProduct)) {
-                viewLogic.saveProduct(currentProduct);
-            }
-        });
+        save.addClickListener(
+                event -> {
+                    if (currentProduct != null
+                            && binder.writeBeanIfValid(currentProduct)) {
+                        viewLogic.saveProduct(currentProduct);
+                    }
+                },
+                Shortcut.of('S', KeyModifier.ALT).withSources(this));
 
         discard = new Button("Discard changes");
         discard.setWidth("100%");
@@ -171,9 +172,12 @@ public class ProductForm extends Div {
         cancel = new Button("Cancel");
         cancel.setWidth("100%");
         cancel.addClickListener(event -> viewLogic.cancelProduct());
-        getElement()
-                .addEventListener("keydown", event -> viewLogic.cancelProduct())
-                .setFilter("event.key == 'Escape'");
+        ShortcutUtil.addShortcut(
+                this, Shortcut.of(Key.ESCAPE), viewLogic::cancelProduct);
+//        REMOVED OLD SHORTCUT FOR CANCELLING THE FORM
+//        getElement()
+//                .addEventListener("keydown", event -> viewLogic.cancelProduct())
+//                .setFilter("event.key == 'Escape'");
 
         delete = new Button("Delete");
         delete.setWidth("100%");
@@ -185,10 +189,6 @@ public class ProductForm extends Div {
         });
 
         content.add(save, discard, delete, cancel);
-
-        ComponentUtil.addShortcut(KeyShortcut.of('S', KeyModifier.META), save::click);
-        ComponentUtil.addShortcut(KeyShortcut.of(Key.ESCAPE), cancel::click);
-
     }
 
     public void setCategories(Collection<Category> categories) {

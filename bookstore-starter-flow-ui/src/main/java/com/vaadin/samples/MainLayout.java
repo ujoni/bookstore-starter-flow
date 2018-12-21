@@ -32,9 +32,12 @@ public class MainLayout extends FlexLayout implements RouterLayout {
 
         add(menu);
 
-        ComponentUtil.addShortcut(this, KeyShortcut.of('L', KeyModifier.META), menu::logout);
-        ComponentUtil.addShortcut(this, KeyShortcut.of('1', KeyModifier.META), this::crudView);
-        ComponentUtil.addShortcut(this, KeyShortcut.of('2', KeyModifier.META), this::aboutView);
+        UI.getCurrent().addShortcutListener(
+                Shortcut.of('L', KeyModifier.ALT), menu::logout);
+        UI.getCurrent().addShortcutListener(
+                Shortcut.of('1', KeyModifier.ALT), this::crudView);
+        UI.getCurrent().addShortcutListener(
+                Shortcut.of('2', KeyModifier.ALT), this::aboutView);
 
     }
 
